@@ -1,7 +1,7 @@
 def bracketing(a, b, func, shift=1.5, max_iter=12):
 
     """
-    Function to  bracket for the bisection method
+    Function to bracket for the bisection method
 
     args:
     a: The left hand side limit
