@@ -1,7 +1,7 @@
 def bracketing(a, b, func, shift=1.5, max_iter=12):
 
     """
-    Function to bracket for the bisection method
+    Function to  bracket for the bisection method
 
     args:
     a: The left hand side limit
@@ -47,7 +47,7 @@ def bisection(a, b, func, eps=1e-6, delta=1e-6,shift=1.5, max_iter=12):
         pass
     else:
         a,b = bracketing(a, b, func, shift, max_iter)
-    
+
     if abs(b-a) < eps and abs(func(a)) < delta:
         print("Done, root found")
         return a,hist
