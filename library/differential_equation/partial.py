@@ -77,3 +77,17 @@ def velocity_verlet(a, x0, v0, n, t_range):
         v.append(v_half_step + 0.5*dt*a(x[i+1]))
     return x,v
     
+
+def leapfrog(a,x0,v0,n,t_range):
+    v = []
+    x = []
+    t0,tn = t_range
+    dt = (tn-t0)/n
+    
+    x.append(x0)
+    v.append(v0)
+    
+    for i in range(n):
+        x.append(x[i]+v[i]*dt + 0.5*a(x[i])*(dt)**2)
+        v.append(v[i] + 0.5*dt*(a(x[i+1])+a(x[i])))
+    return x, v
