@@ -24,3 +24,23 @@ def explicit(steps,init_func,init_t = (0,4), init_x = (0,2), nx = 20, nt = 5000)
     for i in range(nx+1):
         x_.append(x[0]+i*hx)
     return x_,vx
+
+def semi_implicit_euler(f,g, x0, v0, n, t_range):
+    """
+    The function to calculate the solution using semi-implicit Euler.
+    """
+    
+    v = []
+    x = []
+    t0,tn = t_range
+    
+    dt = (tn-t0)/n
+    
+    v.append(v0)
+    x.append(x0)
+    t = 0
+    for i in range(n):
+        v.append(v[i] + g(t,x[i])*dt)
+        x.append(x[i] + f(t,v[i+1])*dt)
+        t = t+dt
+    return x,v,t
