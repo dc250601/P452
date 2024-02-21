@@ -44,3 +44,36 @@ def semi_implicit_euler(f,g, x0, v0, n, t_range):
         x.append(x[i] + f(t,v[i+1])*dt)
         t = t+dt
     return x,v,t
+
+
+def verlet(a, x0, v0, n, t_range):
+    
+    v = []
+    x = []
+    t0,tn = t_range
+    dt = (tn-t0)/n
+    
+    x.append(x0)
+    x.append(x0 + v0*dt + 0.5*a(x0)*(dt)**2)
+    
+    for i in range(n-1):
+        x.append(2*x[-1] - x[-2] + a(x[-1])*(dt)**2)
+    return x
+
+
+def velocity_verlet(a, x0, v0, n, t_range):
+    
+    v = []
+    x = []
+    t0,tn = t_range
+    dt = (tn-t0)/n
+    
+    x.append(x0)
+    v.append(v0)
+    
+    for i in range(n):
+        v_half_step = v[i] + 0.5*dt*a(x[i])
+        x.append(x[i]+v_half_step*dt)
+        v.append(v_half_step + 0.5*dt*a(x[i+1]))
+    return x,v
+    
