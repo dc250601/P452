@@ -84,3 +84,49 @@ def monte_carlo_integration(N,limit,func):
     delta = (a_ - b_)
     sum_ = sum_/N
     return sum_,delta
+
+def gauss_nodes_and_weights(n):
+    """
+    This function is used to find the nodes and weights for Gaussian Quadrature.
+
+    n: number of intervals.
+        
+    """
+    x = []
+    w = []
+    if n == 1:
+        x.append(0.0)
+        w.append(2.0)
+        return x, w
+    for i in range(n):
+        x0 = math.cos(math.pi * (i + 0.75) / (n + 0.5))
+        x1 = 0
+        while abs(x0 - x1) > 1e-10:
+            p0 = 1.0
+            p1 = 0.0
+            for j in range(n):
+                p2 = p1
+                p1 = p0
+                p0 = ((2 * j + 1) * x0 * p1 - j * p2) / (j + 1)
+            pp = n * (x0 * p0 - p1) / (x0 * x0 - 1)
+            x1 = x0
+            x0 = x1 - p0 / pp
+        x.append(x0)
+        w.append(2 / ((1 - x0 * x0) * pp * pp))
+    return x, w
+
+def integration_using_Gauss_Quadrature(f, a, b, n):
+    """
+    Function to calculate the integral of a function using the Gaussian Quadrature Techmique
+    
+    f: The function whose integral has to be calculated
+    a: The lower limit of integration
+    b: The upper limit of integration
+    n: The number of sample points for integration
+    
+    """
+    int_ = 0
+    x, w = gauss_nodes_and_weights(n)
+    for i in range(n):
+        int_ = int_ + w[i]*f(x[i])
+    return int_
