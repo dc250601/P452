@@ -7,11 +7,14 @@ def newton_raphson(guess,func,func_p, eps):
     eps: The maximum error till which the code will run.
     """
     new_guess = 1e100
+    iter = 0
     while(True):
+        iter = iter + 1
         new_guess = guess - func(guess)/func_p(guess)
         if abs(new_guess-guess)<eps:
-            return new_guess
+            return new_guess, iter
         guess = new_guess
+        
 
         
 def newton_raphson_multivariable(F, J, x0, eps = 1e-4):

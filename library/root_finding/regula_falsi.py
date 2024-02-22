@@ -29,8 +29,8 @@ def regula(guess1, guess2, func,shift = 1.5, max_iter=12,eps = 1e-6):
 
         else:
                if abs(func(x0))<eps:
-                   return x0,hist
+                   return x0,hist,counter
                else:
-                   return x1,hist
+                   return x1,hist,counter
         if counter > 1000:
                print("Max iter reached")
