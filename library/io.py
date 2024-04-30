@@ -29,7 +29,7 @@ def transform_vector(vector):
 def read_sequential_data(path, separator = "   "):
     """
     read_sequential_data: Function to read sequential data from a file
-    
+
     args:
     path: The path to the file
     separator: The gap between each column
